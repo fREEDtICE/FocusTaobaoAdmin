@@ -1,0 +1,26 @@
+{% extends '../skeleton_layout.html' %}
+{% block body %}
+<header class="navbar navbar-inverse navbar-fixed-top" role="banner">
+    <div class="container">
+        <div class="navbar-header">
+            <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".bs-navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="/super/{{user._id.toString()}}/workspace" class="navbar-brand">Home</a>
+        </div>
+    </div>
+</header>
+{% block content %}
+{% endblock content %}
+<hr class="featurette-divider">
+<div class="container">
+    <footer>
+        <p class="pull-right"><a href="#">Back to top</a></p>
+
+        <p><a href="/">© 2014 www.taobaofocus.com </a>· <a href="#">Privacy</a> · <a href="#">Terms</a></p>
+    </footer>
+</div>
+{% endblock body %}

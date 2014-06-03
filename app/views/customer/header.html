@@ -1,0 +1,82 @@
+<div class="navbar-wrapper">
+    <div class="container">
+        <div class="navbar navbar-inverse navbar-static-top" role="navigation">
+            <div class="container">
+                <div class="btn-group pull-right shopping-wrapper">
+                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"
+                            id="btn-shopping-cart">
+                        <i class="glyphicon glyphicon-shopping-cart"> 购物车
+                            <span class="caret"></span>
+                        </i>
+                    </button>
+                    <ul class="dropdown-menu" style="left:-300px;width:450px; min-width: 450px;">
+                        <li>
+                            <ul class="media-list" id="shortcart-list">
+                            </ul>
+                        </li>
+                        <li style="padding:5px">
+                            <div id="shopping-summary" class="hidden">
+                                <div class="well well-lg">
+                                    <span>共</span>
+                                    <span class="total-quantity"></span>
+                                    <span>件商品,共</span>
+                                    <span class="total-money"></span>
+                                    <span>元</span>
+                                </div>
+                                <a class="btn btn-success btn-sm pull-right" href="/cus/showcart"
+                                   style="width:150px;">
+                                    去结算
+                                </a>
+                            </div>
+                            <div id="go-shopping" class="well well-lg hidden">
+                                <p>您的购物车空空如也。赶紧去购物吧!</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="btn-group pull-right shopping-wrapper">
+                    {% if user %}
+                    <a target="_blank" href="/cus/login">{{langs.login}}</a>
+                    <a target="_blank" href="/cus/reg">注册</a>
+                    <a target="_blank" href="/cus/myorder">我的订单</a>
+                    <a target="_blank" href="/cus/service/center">服务中心</a>
+                    {% else %}
+                    <a target="_blank" href="/cus/login">{{langs.login}}</a>
+                    <a target="_blank" href="/cus/reg">注册</a>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#">taobaofocus.com</a>
+                </div>
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li class="active"><a href="#">Home</a></li>
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b
+                                    class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#">Action</a></li>
+                                <li><a href="#">Another action</a></li>
+                                <li><a href="#">Something else here</a></li>
+                                <li class="divider"></li>
+                                <li class="dropdown-header">Nav header</li>
+                                <li><a href="#">Separated link</a></li>
+                                <li><a href="#">One more separated link</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

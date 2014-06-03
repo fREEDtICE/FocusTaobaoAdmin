@@ -1,0 +1,67 @@
+{% extends 'skeleton_layout.html' %}
+{% block body %}
+<div class="container">
+    <div class="panel panel-info">
+        <div class="panel-heading">FocusTaobao</div>
+        <div class="table-responsive">
+
+            <table class="table tdmiddle">
+                {% for i in items %}
+                <tr>
+                    <td style="width: 150px">
+                        <a href="/tpi/item/details/{{i.num_iid}}">
+                            <img src="{{i.img_url}}" class="thumbnail" style="width:150px; height: 150px"
+                                 alt="{{i.title}}"/>
+                        </a>
+                    </td>
+                    <td style="max-width: 300px;">
+                        <a href="/tpi/item/details/{{i.num_iid}}">
+                            <h5>{{i.title}}</h5>
+                        </a>
+                    </td>
+                    <td>
+                        <strong><span class="price">{{i.price}}</span></strong>
+                    </td>
+                    <td>
+                        <div class="input-group" style="width: 100px;">
+                        <span class="input-group-btn">
+                             <button class="btn btn-default" data-tag="quantity-minus" type="button">-</button>
+                        </span>
+                            <input type="text" data-tag="quantity" value="{{i.quantity}}" class="form-control">
+                        <span class="input-group-btn">
+                             <button class="btn btn-default" data-tag="quantity-plus" type="button">+</button>
+                        </span>
+                        </div>
+                    </td>
+                    <td>
+                        <button class="btn btn-danger btn-sm">
+                            delete
+                        </button>
+                    </td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+    <div class="container text-right">
+        <span>total price:</span>
+
+        <h2 class="price-total"></h2>
+        <a href="/cus/checkout" class="btn btn-danger">Go Checkout</a>
+    </div>
+
+</div>
+{% endblock body %}
+
+{% block lazy_css %}
+{% parent %}, '/stylesheets/cus/showcart.css'
+{% endblock lazy_css%}
+
+{% block lazy_js %}
+{% parent %}, '/javascripts/cus/showcart.js'
+{% endblock lazy_js %}
+
+{% block lazy_js_fin_func %}
+        focusTaobao.initShowcart();
+{% endblock %}
+

@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Convert Taobaoke Link</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content=“StevenXu”>
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="http://cdn.bootcss.com/html5shiv/3.7.0/html5shiv.min.js"></script>
+    <script src="http://cdn.bootcss.com/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+    <link href="http://cdn.bootcss.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet" charset="utf-8">
+    <script src="http://code.jquery.com/jquery-1.11.0.min.js" charset="utf-8"></script>
+    <script src="http://cdn.bootcss.com/bootstrap/3.1.1/js/bootstrap.min.js" charset="utf-8"></script>
+    <style type="text/css">
+        body {
+            min-height: 768px;
+            vertical-align: middle;
+        }
+    </style>
+</head>
+<body>
+<div class="container" style="height: 100%">
+    <!--<div class="input-group-btn" style="margin-top: auto; margin-bottom: auto;">-->
+    <!--<div class="input-group" style="margin-left: auto; margin-right: auto;">-->
+    <!--<input type="text" class="form-control" id="url-input" style="width: 500px">-->
+    <!--<span class="input-group-btn">-->
+    <!--<button class="btn btn-success" type="button" id="gen-alimama">convert link</button>-->
+    <!--</span>-->
+    <!--</div>-->
+    <!--</div>-->
+    <span class="label label-default" id="description">Converting...</span>
+    <a style="margin-left: auto; margin-right: auto;" id="alimama-link" target="_blank"></a>
+    <input type="hidden" id="url" name="url" value="{{url}}"/>
+    <input type="hidden" id="title" name="title" value="{{title}}"/>
+    <input type="hidden" id="numiid" name="numiid" value="{{numiid}}"/>
+    <input type="hidden" id="_csrf" name="_csrf" value="{{csrftoken}}"/>
+</div>
+<script src="http://l.tbcdn.cn/apps/top/x/sdk.js?appkey=21585630"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        var id = $("input#numiid").val(),
+                url = $("input#url").val(),
+                title = $("input#title").val(),
+                link = $("a#alimama-link"),
+                msg = $("span#description");
+
+        if (!url) {
+            msg.removeClass("label-default").addClass("label-danger").text("Item id is not valid. Not found!");
+        } else {
+            TOP.api('rest', 'get', {
+                method: 'taobao.taobaoke.widget.items.convert',
+                num_iids: id,
+                fields: 'num_iid,title, click_url, commission_rate'
+            }, function (resp) {
+                console.log(resp);
+                if (resp.error_response) {
+                    alert("convert failed: " + resp.error_response.msg);
+                    return false;
+                }
+
+                if (resp.total_results) {
+                    var ritem = resp.taobaoke_items.taobaoke_item[0];
+                    link.text(ritem.title);
+                    link.attr("href", ritem.click_url);
+                    msg.removeClass("label-default").addClass("label-success").text("Has Rebate:)");
+                } else {
+                    link.text(title);
+                    link.attr("href", url);
+                    msg.removeClass("label-default").addClass("label-warning").text("No Rebate:(");
+                }
+            });
+        }
+    });
+    //    $("button#gen-alimama").click(function () {
+    //        var me = $(this),
+    //                uV = $("input#url-input"),
+    //                link = $("a#alimama-link"),
+    //                $csrf = $("input[name='_csrf']"),
+    //                url = uV.val(),
+    //                idstr = "id=";
+    //
+    //
+    //        var id = parseInt(url.substring(url.lastIndexOf(idstr) + idstr.length));
+    //
+    //        if (!id) {
+    //            return alert("invalid input url!");
+    //        }
+
+    //        $.ajax({
+    //            url: "/tpi/item/alimama/convert",
+    //            type: "POST",
+    //            data: {
+    //                num_iid: id,
+    //                _csrf: $csrf.val()
+    //            },
+    //            beforeSend: function () {
+    //                me.button('loading');
+    //            },
+    //            complete: function () {
+    //                me.button('reset');
+    //            },
+    //            success: function (data, status) {
+    ////                console.log(data);
+    //                TOP.api('rest', 'get', {
+    //                    method: 'taobao.taobaoke.widget.items.convert',
+    //                    num_iids: id,
+    //                    fields: 'num_iid,title, click_url, commission_rate'
+    //                }, function (resp) {
+    ////                    console.log(resp);
+    //                    if (resp.error_response) {
+    //                        alert("convert failed: " + resp.error_response.msg);
+    //                        return false;
+    //                    }
+    //
+    //                    if (resp.total_results) {
+    //                        var ritem = resp.taobaoke_items.taobaoke_item[0];
+    //                        link.text(ritem.title);
+    //                        link.attr("href", ritem.click_url);
+    ////                        for (var i = 0; i < ritem.length; ++i) {
+    ////                            console.log(ritem[i].click_url);
+    ////                        }
+    //                    } else {
+    //                        link.text("No Rebate:(");
+    //                        link.attr("href", "javascript:void(0);");
+    //                    }
+    //                });
+    //            },
+    //            error: function (xmlreq, msg, err) {
+    //            }
+    //        });
+    //    });
+</script>

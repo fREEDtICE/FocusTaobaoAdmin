@@ -1,0 +1,24 @@
+{% extends "../skeleton_layout.html" %}
+{% block body %}
+<div class="container">
+    <form class="form-signin" id="main" role="form" action="/super/login" method="POST">
+        <h2 class="form-signin-heading">Admin login</h2>
+        <input type="text" class="form-control" placeholder="User Token" name="token" id="token" required=""
+               autofocus="">
+        <input type="password" class="form-control" placeholder="Password" name="password" id="password" required="">
+        <!--<label class="checkbox">-->
+        <!--<input type="checkbox" value="remember-me">-->
+        <!--</label>-->
+        <input type="hidden" id="_csrf" name="_csrf" value="{{csrftoken}}"/>
+        <button class="btn btn-lg btn-success btn-block" type="submit">Login</button>
+    </form>
+</div>
+{% endblock %}
+
+{% block lazy_css %}
+{% parent %}, "/stylesheets/admin/login.css"
+{% endblock %}
+
+{% block lazy_js %}
+"/javascripts/jquery.md5.min.js"
+{% endblock %}

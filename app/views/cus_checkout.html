@@ -1,0 +1,94 @@
+{% extends 'skeleton_layout.html' %}
+{% block body %}
+{% include "cus_header.html" %}
+<div class="container">
+    <form action="/cus/orders/new" role="form" method="POST">
+        <input type="hidden" id="_csrf" name="_csrf" value="{{csrftoken}}" />
+        <div class="panel panel-default">
+            <div class="panel-heading">Select a shipping address</div>
+            <div class="panel-body">
+                <div class="radio">
+                    <label>
+                        <input type="radio" name="addressRadios" id="addressRadio1" value="address1" checked>
+                        Your address 1
+                    </label>
+                </div>
+                <div class="radio">
+                    <label>
+                        <input type="radio" name="addressRadios" id="addressRadio2" value="address2">
+                        Your address 2
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading">Choose your payment function</div>
+            <div class="panel-body">
+                <div class="radio">
+                    <label>
+                        <input type="radio" name="paymentRadios" id="paymentRadios1" value="payment1" checked>
+                        WeChat
+                    </label>
+                </div>
+                <div class="radio">
+                    <label>
+                        <input type="radio" name="paymentRadios" id="paymentRadios2" value="payment2">
+                        Paypal
+                    </label>
+                </div>
+                <button type="button" class="btn btn-link">
+                    Add new address
+                </button>
+            </div>
+        </div>
+
+        <div class="panel panel-default">
+            <div class="panel-heading">Item List</div>
+            <div class="panel-body">
+                <div class="table-responsive">
+                    <table class="table tdmiddle">
+                        {% for i in items %}
+                        <tr>
+                            <td style="width: 150px">
+                                <a href="/tpi/item/details/{{i.num_iid}}">
+                                    <img src="{{i.img_url}}" class="thumbnail" style="width:150px; height: 150px"
+                                         alt="{{i.title}}"/>
+                                </a>
+                            </td>
+                            <td style="max-width: 300px;">
+                                <a href="/tpi/item/details/{{i.num_iid}}">
+                                    <h5>{{i.title}}</h5>
+                                </a>
+                            </td>
+                            <td>
+                                <strong><span class="price">{{i.price}}</span></strong>
+                            </td>
+                            <td>
+                                <div class="input-group" style="width: 100px;">
+                                     <span class="input-group-btn">
+                                        <button class="btn btn-default" data-tag="quantity-minus" type="button">-</button>
+                                     </span>
+                                    <input type="text" data-tag="quantity" value="{{i.quantity}}" class="form-control">
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-default" data-tag="quantity-plus" type="button">+</button>
+                                    </span>
+                                </div>
+                                <input type="hidden" name="item_info" value='{{JSON.stringify(i)}}' />
+                            </td>
+                            <td>
+                                <button class="btn btn-danger btn-sm">
+                                    delete
+                                </button>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="text-right">
+            <button type="submit" class="btn btn-info">Submit</button>
+        </div>
+    </form>
+</div>
+{% endblock body %}

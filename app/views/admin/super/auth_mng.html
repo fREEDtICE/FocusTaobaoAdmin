@@ -1,0 +1,81 @@
+{% extends 'basic_layout.html' %}
+{% block content %}
+<div class="panel panel-default">
+    <div class="panel-heading">Auth Settings</div>
+    <div class="panel-body">
+        <p>
+            The navigator below is for setting authorizations for each role in admin system.
+        </p>
+        <ul id="auth-tab" class="nav nav-pills nav-justified">
+            {% for role in roles %}
+            <li><a href="#{{role}}-content" data-toggle="tab">{{role|title}}</a></li>
+            {% endfor %}
+        </ul>
+        <div id="route-contents" class="tab-content">
+            <div class="tab-pane" id="profile">...</div>
+            <div class="tab-pane" id="messages">...</div>
+            <div class="tab-pane" id="settings">...</div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="modal-new-user" tabindex="-1" role="dialog" aria-labelledby="modal-new-user-label"
+     aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="modal-new-user-label">Add New User</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-horizontal">
+                    <div class="form-group">
+                        <label for="token" class="col-sm-4 control-label">Token</label>
+
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control" name="token" id="token"
+                                   placeholder="Unique token as login name">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-horizontal">
+                    <div class="form-group">
+                        <label for="token" class="col-sm-4 control-label">Role</label>
+
+                        <div class="col-sm-6">
+                            <select class="form-control">
+                                {% for role in roles %}
+                                <option name="role" id="role" value="{{role}}">{{role}}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-horizontal">
+                    <div class="form-group">
+                        <label for="token" class="col-sm-4 control-label">Password</label>
+
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control" name="password" id="password"
+                                   placeholder="Input password">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-horizontal">
+                    <div class="form-group">
+                        <label for="token" class="col-sm-4 control-label">Confirm Password</label>
+
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control" name="confirm-password" id="confirm-password"
+                                   placeholder="Confirm password">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" id="btn-add-user">Add</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

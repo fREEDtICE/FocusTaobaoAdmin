@@ -1,0 +1,58 @@
+<div class="jumbotron">
+    <div class="container">
+        <div class="btn-group pull-right">
+            <a target="_blank" href="/cus/login">{{langs.login}}</a>
+            <a target="_blank" href="/cus/reg">注册</a>
+            <a target="_blank" href="/cus/myorder">我的订单</a>
+            <a target="_blank" href="/cus/service/center">服务中心</a>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-md-2 cus-search">
+
+            </div>
+            <div class="col-xs-12 col-md-9 cus-shopping-cart">
+                <form class="navbar-form navbar-left" role="search">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Search">
+                    </div>
+                    <button type="submit" class="btn btn-warning">搜索</button>
+                </form>
+            </div>
+            <div class="col-xs-12 col-md-1 btn-group">
+                <button type="button" class="btn btn-warning dropdown-toggle" data-toggle="dropdown"
+                        id="btn-shopping-cart">
+                    <i class="glyphicon glyphicon-shopping-cart"> 购物车
+                        <span class="caret"></span>
+                    </i>
+                </button>
+                <ul class="dropdown-menu" style="left:-300px;width:450px; min-width: 450px;">
+                    <li>
+                        <ul class="media-list" id="shortcart-list">
+                        </ul>
+                    </li>
+                    <li style="padding:5px">
+                        <div id="shopping-summary" class="hidden">
+                            <div class="well well-lg">
+                                <span>共</span>
+                                <span class="total-quantity"></span>
+                                <span>件商品,共</span>
+                                <span class="total-money"></span>
+                                <span>元</span>
+                            </div>
+                            <a class="btn btn-success btn-sm pull-right" href="/cus/showcart"
+                                    style="width:150px;">
+                                去结算
+                            </a>
+                        </div>
+                        <div id="go-shopping" class="well well-lg hidden">
+                            <p>您的购物车空空如也。赶紧去购物吧!</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+

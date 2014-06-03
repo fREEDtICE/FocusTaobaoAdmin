@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no"/>
+    <style type="text/css">
+        body, html, #gsy-map {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            hidden;
+            margin: 0;
+        }
+    </style>
+    <script type="text/javascript"
+            src="http://api.map.baidu.com/api?type=quick&amp;ak=F460dfd0cfd303e9e0d73fc2fe183cf0&amp;v=1.0"></script>
+    <script type="text/javascript" src="gsy_art.js"></script>
+    <title>关山月美术馆交通指引</title>
+</head>
+<body>
+<div id="gsy-map"></div>
+</body>
+>
+</html>
+<script type="text/javascript">
+    var map = new BMap.Map("gsy-map");
+    map.centerAndZoom(new BMap.Point(116.404, 39.915), 14);
+    map.addControl(new BMap.ZoomControl());
+    map.addControl(new BMap.PublicTrafficLine());
+    function addMarker(point, index) {  // 创建图标对象
+        var myIcon = new BMap.Icon("http://api.map.baidu.com/mapCard/img/location.gif",
+                new BMap.Size(14, 23), {
+                    // 指定定位位置。
+                    // 当标注显示在地图上时，其所指向的地理位置距离图标左上
+                    // 角各偏移7像素和25像素。您可以看到在本例中该位置即是
+                    // 图标中央下端的尖角位置。
+                    anchor: new BMap.Size(7, 25)
+                });
+        // 创建标注对象并添加到地图
+        var marker = new BMap.Marker(point, {icon: myIcon});
+        map.addOverlay(marker);
+        marker.addEventListener("click", function () {
+            var opts = {
+                width: 100,     // 信息窗口宽度
+                height: 50,     // 信息窗口高度
+                title: "Hello"  // 信息窗口标题
+            }
+            var infoWindow = new BMap.InfoWindow("Not working", opts);  // 创建信息窗口对象
+            map.openInfoWindow(infoWindow, marker.getPosition());      // 打开信息窗口
+        });
+
+    }
+    // 随机向地图添加10个标注
+    var bounds = map.getBounds();
+    var lngSpan = bounds.getNorthEast().lng - bounds.getSouthWest().lng;
+    var latSpan = bounds.getNorthEast().lat - bounds.getSouthWest().lat;
+    for (var i = 0; i < 10; i++) {
+        var point = new BMap.Point(bounds.getSouthWest().lng + lngSpan * (Math.random() * 0.7 + 0.15), bounds.getSouthWest().lat + latSpan * (Math.random() * 0.7 + 0.15));
+        addMarker(point, i);
+    }
+
+    var routeSearch = new BMap.RouteSearch();
+    var start = {
+        latlng: new BMap.Point(116.404, 39.915),
+        name: "故宫"
+    }
+    var end = {
+        latlng: new BMap.Point(116.380825, 39.915455),
+        name: "肯德基（汉光店）"
+    }
+    var opts = {
+        mode: BMAP_MODE_TRANSIT,//公交、驾车、导航均修改该参数
+        region: "北京"
+    }
+    var ss = new BMap.RouteSearch();
+//    routeSearch.routeCall(start, end, opts);
+</script>

@@ -1,0 +1,7 @@
+{% extends 'customer_layout.html' %}
+
+{% block content %}
+<h1>Pay successful!</h1>
+<a class="btn btn-success" href="/">Continue Shopping</a>
+<a class="btn btn-default" href="/customer/{{user_.id.toString()}}/myorder">Check Orders</a>
+{% endblock content %}

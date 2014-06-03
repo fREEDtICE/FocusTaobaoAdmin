@@ -1,0 +1,231 @@
+{% extends "customer_layout.html" %}
+{% block content %}
+<div class="container">
+
+<div class="jumbotron">
+    <!--<form method="post" enctype="application/x-www-form-urlencoded" class="form-inline" role="form">-->
+    <div class="url-wrapper">
+        <label class="sr-only" for="url-input">Please input any taobao item or tmall item link here{{}}}</label>
+        <input type="text" class="input-lg form-control" id="url-input"
+               placeholder="Please input any taobao item or tmall item link here{{}}}">
+        <button type="button" id="btn-url" class="btn btn-lg btn-success disabled">Let's Shopping</button>
+    </div>
+    <!--</form>-->
+</div>
+<div class="container marketing">
+<h2 class="featurette-heading">How it works</h2>
+<hr class="featurette-divider">
+<div class="row">
+    <div class="col-lg-4">
+        <img class="img-rounded"
+             src="/images/customers/home/step1.png"
+             width="128px"
+             height="128px">
+
+        <h2>Step 1</h2>
+
+        <p>Search and choose items on <a href="http://www.taobao.com" target="_blank">Taobao.com</a> or in
+            translated Taobao catalog.
+        </p>
+
+        <p><a class="btn btn-default" href="/t/how-to-taobao" role="button">Learn More »</a></p>
+    </div>
+    <!-- /.col-lg-4 -->
+    <div class="col-lg-4">
+        <img class="img-rounded"
+             src="/images/customers/home/step2.png"
+             width="128px"
+             height="128px">
+
+        <h2>Step 2</h2>
+
+        <p><a href="/customer/register">Register</a>/<a href="/customer/login">Login</a> in Taobao order system and submit items to shopping cart</p>
+
+        <p><a class="btn btn-default" href="/customer/register" role="button">Get Account Now »</a></p>
+    </div>
+    <!-- /.col-lg-4 -->
+    <div class="col-lg-4">
+        <img class="img-rounded"
+             src="/images/customers/home/step3.png"
+             width="128px"
+             height="128px">
+
+        <h2>Step 3</h2>
+
+        <p>
+            Make first payment for taobao items and commission.
+        </p>
+        <br>
+
+        <p><a class="btn btn-default" href="/t/item-payment" role="button">View Details »</a></p>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-4">
+        <img class="img-rounded"
+             src="/images/customers/home/step4.png"
+             width="128px"
+             height="128px">
+
+        <h2>Step 4</h2>
+
+        <p>We receive item and make quality check: make payment for international shipping.</p>
+
+        <p><a class="btn btn-default" href="/t/quality-check-ship-payment" role="button">View Details »</a></p>
+    </div>
+    <div class="col-lg-4">
+        <img class="img-rounded"
+             src="/images/customers/home/step5.png"
+             width="128px"
+             height="128px">
+
+        <h2>Step 5</h2>
+
+        <p>
+            Track the delivery online and receive your parcel at home within estimated time.
+        </p>
+
+        <p><a class="btn btn-default" href="/t/international-ship" role="button">View Details »</a></p>
+    </div>
+</div>
+<!-- START THE FEATURETTES -->
+
+<hr class="featurette-divider">
+
+<div class="row featurette">
+    <div class="col-md-7">
+        <h2 class="featurette-heading">
+            Why buy from Taobao.com
+        </h2>
+
+        <h2>
+            <span class="text-muted">Large Choice of Products</span>
+        </h2>
+
+        <ul>
+            <li>
+                <p class="lead">
+                    Nearly UNLIMITED range of items to buy from Taobao.com
+                </p>
+            </li>
+            <li>
+                <p class="lead">
+                    Get the articles you cannot find anywhere else
+                </p>
+            </li>
+            <li>
+                <p class="lead">
+                    Buy Chinese, Asian traditional products at lowest price
+                </p>
+            </li>
+            <li>
+                <p class="lead">
+                    Find goods delivered directly from factories
+                </p>
+            </li>
+            <li>
+                <p class="lead">
+                    Search for lots of creative, unique and hand-made products
+                </p>
+            </li>
+        </ul>
+    </div>
+    <div class="col-md-5">
+        <img class="featurette-image img-responsive shadow-box"
+             src="/images/customers/home/items1.jpg">
+    </div>
+</div>
+
+<hr class="featurette-divider">
+
+<div class="row featurette">
+    <div class="col-md-5">
+        <img class="featurette-image img-responsive shadow-box"
+             src="/images/customers/home/box.jpg">
+    </div>
+    <div class="col-md-7">
+        <h2 class="featurette-heading">
+            Why buy from taobao with Taobao agent
+        </h2>
+
+        <h2>
+            <span class="text-muted">Lower Prices</span>
+        </h2>
+        <ul>
+            <li>
+                <p class="lead">
+                    With Taobao agent you benefit from low international shipping fees, for most items the total
+                    cost is at least half of the price in your home country
+                </p>
+            </li>
+            <li>
+                <p class="lead">
+                    Buy in RMB and pay in Euro or USD: save on money transfer and currency exchange
+                </p>
+            </li>
+            <li>
+                <p class="lead">
+                    You see the real pictured items as how you will receive it at home: before international
+                    shipping we take the pictures of all items that you buy from taobao.com.
+                </p>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<hr class="featurette-divider">
+
+<div class="row featurette">
+    <div class="col-md-7">
+        <h2 class="featurette-heading">
+            China online shopping with Taobao agent
+        </h2>
+
+        <h2>
+            <span class="text-muted">Professional, Responsible</span>
+        </h2>
+        <ul>
+            <li>
+                <p class="lead">
+                    Taobao China online shopping and sourcing
+                </p>
+            </li>
+            <li>
+                <p class="lead">
+                    Buying online from China
+                </p>
+            </li>
+            <li>
+                <p class="lead">
+                    Quality check
+                </p>
+            </li>
+            <li>
+                <p class="lead">
+                    International shipping
+                </p>
+            </li>
+            <li>
+                <p class="lead">
+                    Taobao dropshipping
+                </p>
+            </li>
+        </ul>
+    </div>
+    <div class="col-md-5 featurette-image-container shadow-box">
+        <img class="featurette-image img-responsive"
+             src="/images/customers/home/team.jpg">
+    </div>
+</div>
+</div>
+</div>
+
+{% endblock content %}
+
+{% block lazy_js %}
+{% parent %}, "/javascripts/cus/home/homeloader.js"
+{% endblock lazy_js %}
+
+{% block lazy_css %}
+{% parent%},  "/stylesheets/cus/home.css"
+{% endblock lazy_css %}

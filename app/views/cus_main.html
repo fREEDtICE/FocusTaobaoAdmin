@@ -1,0 +1,26 @@
+{% extends 'basic_cus_layout.html' %}
+{% block left-nav %}
+<div class="list-group" id="div_cat">
+    {% for datacat in cats%}
+    {% set cat = datacat.taobaoInfo %}
+    <a class="list-group-item" data-cid="{{cat.cid}}" data-parent-cid="{{cat.parent_cid}}" data-is-parent="{{cat.is_parent}}" data-status="{{cat.status}}" href="javascript:void(0);">{{cat.name}}</a>
+    {% endfor %}
+</div>
+{% endblock %}
+
+
+
+{% block content %}
+{% endblock %}
+
+{% block lazy_css %}
+{% parent %}, "/stylesheets/iframe.css"
+{% endblock %}
+
+{% block lazy_js %}
+{% parent %}, "/javascripts/cus/catloader.js"
+{% endblock %}
+
+{% block lazy_js_fin_func %}
+    focusTaobao.initCatLoader();
+{%endblock%}

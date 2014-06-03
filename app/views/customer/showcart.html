@@ -1,0 +1,95 @@
+{% extends "customer_layout.html" %}
+{% block content %}
+<div class="container">
+    <input type="hidden" name="_csrf" value="{{csrftoken}}">
+
+    <div class="panel panel-info">
+        <div class="panel-heading">TaobaoFocus</div>
+        <div class="table-responsive">
+            <table class="table tdmiddle">
+                {% for i in shoppingcart %}
+                <tr>
+                    <td style="width:150px">
+                        <input type="hidden" name="skuid" value="{{i.skuid}}">
+                        <a href="/items/d/{{i.numiid}}">
+                            <img src="{{i.img}}" class="thumbnail" style="width:150px; height: 150px"
+                                 alt="{{i.title}}"/>
+                        </a>
+                    </td>
+                    <td style="max-width: 300px;">
+                        <a href="/items/d/{{i.numiid}}">
+                            <h5>{{i.title}}</h5>
+                        </a>
+                        {% for props in i.sel_prop %}
+                        <p>
+                            <span class="prop-name">{{ props.cname }}:</span>
+                            <span class="prop-value">{{ props.alias || props.name }}</span>
+                        </p>
+                        {% endfor %}
+                    </td>
+                    <td>
+                        <span class="price">{{i.price}}</span>
+                    </td>
+                    <td>
+                        <div class="input-group" style="width: 110px;" name="quantity-container"
+                             data-toggle="popover">
+                            <span class="input-group-btn">
+                                <button class="btn btn-default" name="quantity-minus" type="button">-</button>
+                            </span>
+                            <input type="text" name="quantity" value="{{i.quantity}}"
+                                   class="form-control text-center">
+                            <span class="input-group-btn">
+                                <button class="btn btn-default" name="quantity-plus" type="button">+</button>
+                            </span>
+                        </div>
+                    </td>
+                    <td>
+                        <a name="item-del" data-skuid="{{i.skuid}}" class="btn btn-link btn-sm">
+                            Delete
+                        </a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+    <div class="container text-right">
+        <p>
+            Item total:
+            <span id="item-total">
+            </span>
+        </p>
+
+        <p>Commission:
+            <span id="customer-commission">
+            </span>
+        </p>
+
+        <p>Total price:
+            <span id="price-total"></span>
+        </p>
+        <a href="/customer/order" class="btn btn-success">Go Checkout</a>
+    </div>
+</div>
+<div class="modal fade" id="confirmModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">Confirm</h4>
+            </div>
+            <div class="modal-body">
+                <p>Sure to delete this item?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal" id="modal-cancel">Cancel</button>
+                <button type="button" class="btn btn-danger" id="modal-confirm">Confirm</button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}
+
+{% block lazy_js %}
+{% parent %}, '/javascripts/cus/home/showcart.js'
+{% endblock %}

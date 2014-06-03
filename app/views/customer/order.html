@@ -1,0 +1,196 @@
+{% extends 'customer_layout.html' %}
+{% block content %}
+<div class="container">
+    <div class="row">
+    <input type="hidden" id="_csrf" name="_csrf" value="{{csrftoken}}"/>
+    <div class="panel panel-default">
+        <div class="panel-heading">Select a shipping address</div>
+        <div class="panel-body address-container">
+            {% for addr in user.shippingAddress %}
+            {% if loop.index0 > 2%}
+            <div class="radio address-wrapper hidden">
+            {% else %}
+            <div class="radio address-wrapper">
+            {% endif %}
+            <label>
+                {% if loop.index0 === 0%}
+                <input type="radio" name="addressRadio" id="{{addr.tag}}" value="{{addr.tag}}" checked="true">
+                {% else %}
+                <input type="radio" name="addressRadio" id="{{addr.tag}}" value="{{addr.tag}}">
+                {% endif %}
+                {{addr.tag}}
+            </label>
+            <span class="info-details">{{addr.address}}, {{addr.addressee}} {{addr.addresseeContact}}</span>
+            </div>
+        {% endfor %}
+        {% if user.shippingAddress.length > 3 %}
+        <div class="more-address-wrapper">
+            <p><a>Show all address</a></p>
+        </div>
+        {% endif %}
+        <div class="new-address-wrapper">
+            <p><a id="new-address-anchor" href="javascript:void(0);">Add New Address</a></p>
+            <div class="new-address-editor form-horizontal hidden">
+                <div class="form-group">
+                    <label for="inputTag" class="col-sm-2 control-label">Tag:</label>
+                    <div class="col-sm-2">
+                        <input type="text" class="form-control" id="inputTag" placeholder="Tag">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="countrySelect" class="col-sm-2 control-label">Country:</label>
+                    <div class="col-sm-2">
+                        <select class="form-control" id="countrySelect">
+                            <option value="AC">America</option>
+                            <option value="RU">Russia</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputAddress" class="col-sm-2 control-label">Address:</label>
+                    <div class="col-sm-3">
+                        <input type="text" class="form-control" id="inputAddress" placeholder="Address">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputZipCode" class="col-sm-2 control-label">Zip Code:</label>
+                    <div class="col-sm-3">
+                        <input type="text" class="form-control" id="inputZipCode" placeholder="Zip Code">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputAddressee" class="col-sm-2 control-label">Addressee:</label>
+                    <div class="col-sm-3">
+                        <input type="text" class="form-control" id="inputAddressee" placeholder="Addressee">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputContact" class="col-sm-2 control-label">Contact Mobile Phone:</label>
+                    <div class="col-sm-3">
+                        <input type="text" class="form-control" id="inputContact" placeholder="Contact">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                        <button id="btn-submit-address" type="button" class="btn btn-success">Confirm Address</button>
+                        <button id="btn-cancel-address" type="button" class="btn btn-default">Cancel</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<div class="panel panel-default">
+    <div class="panel-heading">Choose your payment function</div>
+    <div class="panel-body">
+        <div class="radio">
+            <label>
+                <input type="radio" name="paymentRadios" id="paymentRadios1" value="payment1" checked>
+                WeChat
+                <span class="info-details"></span>
+            </label>
+        </div>
+        <div class="radio">
+            <label>
+                <input type="radio" name="paymentRadios" id="paymentRadios2" value="payment2">
+                Paypal
+            </label>
+        </div>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">Item List</div>
+    <div class="panel-body">
+        <div class="table-responsive">
+            <table class="table tdmiddle">
+                {% for i in shoppingcart %}
+                <tr>
+                    <td style="width:150px">
+                        <input type="hidden" name="skuid" value="{{i.skuid}}">
+                        <a href="/items/d/{{i.numiid}}">
+                            <img src="{{i.img}}" class="thumbnail" style="width:150px; height: 150px"
+                                 alt="{{i.title}}"/>
+                        </a>
+                    </td>
+                    <td style="max-width: 300px;">
+                        <a href="/items/d/{{i.numiid}}">
+                            <h5>{{i.title}}</h5>
+                        </a>
+                        {% for props in i.sel_prop %}
+                        <p>
+                            <span class="prop-name">{{ props.cname }}:</span>
+                            <span class="prop-value">{{ props.alias || props.name }}</span>
+                        </p>
+                        {% endfor %}
+                    </td>
+                    <td>
+                        <span class="price">{{i.price}}</span>
+                    </td>
+                    <td>
+                        <div class="input-group" style="width: 110px;" name="quantity-container"
+                             data-toggle="popover">
+                            <span class="input-group-btn">
+                                <button class="btn btn-default" name="quantity-minus" type="button">-</button>
+                            </span>
+                            <input type="text" name="quantity" value="{{i.quantity}}"
+                                   class="form-control text-center">
+                            <span class="input-group-btn">
+                                <button class="btn btn-default" name="quantity-plus" type="button">+</button>
+                            </span>
+                        </div>
+                    </td>
+                    <td>
+                        <a name="item-del" data-skuid="{{i.skuid}}" class="btn btn-link btn-sm">
+                            Delete
+                        </a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+</div>
+        <div class="container text-right">
+            <p>
+                Item total:
+            <span id="item-total">
+            </span>
+            </p>
+
+            <p>Commission:
+            <span id="customer-commission">
+            </span>
+            </p>
+
+            <p>Total price:
+                <span id="price-total"></span>
+            </p>
+            <button type="button" id="btn-order-submit" class="btn btn-success">Submit Order</button>
+        </div>
+    </div>
+</div>
+    <div class="modal fade" id="confirmModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">Confirm</h4>
+                </div>
+                <div class="modal-body">
+                    <p>Sure to delete this item?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal" id="modal-cancel">Cancel</button>
+                    <button type="button" class="btn btn-danger" id="modal-confirm">Confirm</button>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+{% endblock content %}
+{% block lazy_js %}
+{% parent %}, '/javascripts/cus/home/checkout.js'
+{% endblock %}

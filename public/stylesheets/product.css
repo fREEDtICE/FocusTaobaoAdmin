@@ -1,0 +1,26 @@
+.thumbnail{
+    margin-bottom: 0px;
+}
+
+.carousel-control.left{
+    background-image: none;
+    left: -55px;
+}
+
+.carousel-control{
+    color: #111111;
+    opacity: 0.8;
+}
+
+.carousel-control.right{
+    background-image: none;
+    right: -55px;
+}
+
+div#product-carousel{
+    margin-top: 10px;
+}
+
+div#product-main-contents{
+   padding-left: 20px;
+}

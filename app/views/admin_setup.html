@@ -1,0 +1,145 @@
+{% extends "skeleton_layout.html" %}
+{% block body %}
+<style>
+    span.help-block {
+        color: #b11516;
+    }
+
+    body {
+        padding-top: 75px;
+    }
+
+    div.header-wrapper {
+        width: 980px;
+        height: 75px;
+        display: table;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    nav.navbar {
+        height: 75px;
+        min-height: 75px;
+        background: #ffffff;
+    }
+
+    div.mod-header {
+        width: 330px;
+        height: 75px;
+        position: relative;
+        background: url(/images/reg/reg_img.png) right no-repeat;
+    }
+
+    div.mod-header a {
+        height: 75px;
+    }
+
+    div.mod-header a img {
+        margin-top: 15px;
+    }
+
+    div#login-div {
+        position: relative;
+    }
+
+    form#main {
+        width: 560px;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 10px;
+    }
+
+
+</style>
+<nav class="navbar navbar-default navbar-fixed-top hidden-xs" role="navigation">
+    <div class="header-wrapper">
+        <div class="mod-header">
+            <a href="/home">
+                <img src="/images/super/t_logo.png" alt="logo">
+            </a>
+        </div>
+    </div>
+</nav>
+<div class="container">
+    <form id="main" method="post" class="form-horizontal" role="form">
+        <input type="hidden" id="_csrf" name="_csrf" value="{{csrftoken}}"/>
+        <div class="form-group">
+            <label for="inputName" class="col-sm-2 control-label">用户名</label>
+
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="inputName" placeholder="用户名,由字母和数字构成">
+                <span class="help-block hide" id="token-tips"></span>
+            </div>
+        </div>
+        <!--<div class="form-group">-->
+        <!--<label for="inputLabel" class="col-sm-2 control-label">昵称</label>-->
+
+        <!--<div class="col-sm-10">-->
+        <!--<input type="text" class="form-control" id="inputLabel" placeholder="用户昵称, 12个汉字内">-->
+        <!--<span class="help-block hide" id="label-tips"></span>-->
+        <!--</div>-->
+        <!--</div>-->
+        <!--<div class="form-group">-->
+        <!--<label for="inputWeChatToken" class="col-sm-2 control-label">微信token</label>-->
+
+        <!--<div class="col-sm-10">-->
+        <!--<input type="text" class="form-control" id="inputWeChatToken" placeholder="微信Token">-->
+        <!--<span class="help-block hide" id="wechat-token-tips"></span>-->
+        <!--</div>-->
+        <!--</div>-->
+        <div class="form-group">
+            <label for="inputPassword" class="col-sm-2 control-label">密码</label>
+
+            <div class="col-sm-10">
+                <input type="password" class="form-control" id="inputPassword" placeholder="密码">
+                <span class="help-block hide" id="pwd-tips"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="confirmPassword" class="col-sm-2 control-label">确认密码</label>
+
+            <div class="col-sm-10">
+                <input type="password" class="form-control" id="confirmPassword" placeholder="确定密码">
+                <span class="help-block hide" id="confirm-pwd-tips"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-10">
+                <div class="radio">
+                    <label>
+                        <input type="radio" name="userTypeRadios" id="super" value="super">
+                        超级管理员
+                    </label>
+                </div>
+                <div class="radio">
+                    <label>
+                        <input type="radio" name="userTypeRadios" id="buyer" value="buyer" checked>
+                        买手
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="intputVerify" class="col-sm-2 control-label">验证码</label>
+
+            <div class="col-sm-10">
+                <input type="text" id="intputVerify">
+                        <span class="icon-wrapper">
+                            <img id="imgVerify" src="">
+                        </span>
+                <a class="login-change-code" href="javascript:;" id="changeimg_link">换一张</a>
+                <span class="help-block hide" id="verify-tips"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <button type="button" id="submitBtn" class="btn btn-primary">添加用户</button>
+            </div>
+        </div>
+    </form>
+</div>
+{% endblock %}
+
+{% block lazy_js%}
+{% parent %}, "/javascripts/jquery.md5.min.js", "/javascripts/admin/setup.js"
+{% endblock%}

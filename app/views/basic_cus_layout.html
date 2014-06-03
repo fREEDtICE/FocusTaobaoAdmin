@@ -1,0 +1,19 @@
+{% extends 'skeleton_layout.html' %}
+{% block body %}
+{% include "cus_header.html" %}
+<div class="navbar" id="div_nav_bar" role="navigation">
+    {% block top-nav-fixed %}{% endblock %}
+</div>
+<div class="container" id="div_container">
+    <div class="row" id="div_row">
+        <div class="col-xs-12 col-md-4" id="div_left_nav">
+            {% block left-nav %}
+            {% endblock %}
+        </div>
+        <div class="col-xs-12 col-md-8" id="div_content">
+            {% block content %}
+            {% endblock %}
+        </div>
+    </div>
+</div>
+{% endblock %}

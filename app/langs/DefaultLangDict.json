@@ -1,0 +1,28 @@
+[
+    {
+        "key": "order_alloc",
+        "langs": [
+            {
+                "langId": "zh-CN",
+                "value": "订单分配"
+            },
+            {
+                "langId": "en",
+                "value": "Order Allocation"
+            }
+        ]
+    },
+    {
+        "key": "login",
+        "langs": [
+            {
+                "langId": "zh-CN",
+                "value": "登陆"
+            }                 ,
+            {
+                "langId": "en",
+                "value": "Login"
+            }
+        ]
+    }
+]

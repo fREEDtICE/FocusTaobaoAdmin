@@ -1,0 +1,7 @@
+table.tdmiddle tbody > tr > td {
+    vertical-align: middle;
+}
+
+span.price {
+    color: #ee3333;
+}

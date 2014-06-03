@@ -1,0 +1,16 @@
+{% if user %}
+<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+    {% if user.roles|contains("super") %}
+    <li>
+        <a href="/super/order/alloc">订单分配</a>
+    </li>
+    <li>
+        <a href="/super/cat/mag">类目管理</a>
+    </li>
+    {% elseif user.roles|contains("buyer") %}
+    <li>
+        <a href="/super/buyer_order_handle">订单处理</a>
+    </li>
+    {% endif %}
+</nav>
+{% endif %}

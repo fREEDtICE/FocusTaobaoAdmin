@@ -1,0 +1,29 @@
+{% for item in items %}
+{% if loop.index0 % columns === 0 %}
+<div class="row">
+    {% endif %}
+    <div class="col-xs-12 col-md-{{colWidth}} product">
+        <a href="/tpi/item/details/{{item.num_iid}}" class="thumbnail" data-num-iid="{{item.num_iid}}" data-seller-id="{{item.seller_id}}"
+           data-nick="{{item.nick}}" data-title="{{item.title}}" data-price="{{item.price}}" data-volume="{{item.volume}}">
+            <img width="100%" height="200px" src="{{item.pic_url}}" alt="{{item.title}}">
+            <div class="caption">
+                <h4>{{item.title}}</h4>
+                <h5>{{item.price}}</h5>
+                <h5>{{item.volume}}</h5>
+            </div>
+        </a>
+        <a href="{{item.item_url}}">{{item.item_url}}</a>
+    </div>
+    {% if (loop.index % columns === 0 && loop.index0 > 0) || loop.last %}
+</div>
+{% endif %}
+{% endfor %}
+<ul class="pagination">
+    <li><a href="javascript:void(0);" data-url="/tpi/product/list?cid={{cid}}&pageno=1&pagesize={{pageSize}}">&laquo;</a></li>
+    <li><a href="javascript:void(0);" data-url="/tpi/product/list?cid={{cid}}&pageno={{pageNo-2}}&pagesize={{pageSize}}">{{pageNo-2}}</a></li>
+    <li><a href="javascript:void(0);" data-url="/tpi/product/list?cid={{cid}}&pageno={{pageNo-1}}&pagesize={{pageSize}}">{{pageNo-1}}</a></li>
+    <li><a href="javascript:void(0);" data-url="/tpi/product/list?cid={{cid}}&pageno={{pageNo}}&pagesize={{pageSize}}">{{pageNo}}</a></li>
+    <li><a href="javascript:void(0);" data-url="/tpi/product/list?cid={{cid}}&pageno={{pageNo+1}}&pagesize={{pageSize}}">{{pageNo+1}}</a></li>
+    <li><a href="javascript:void(0);" data-url="/tpi/product/list?cid={{cid}}&pageno={{pageNo+2}}&pagesize={{pageSize}}">{{pageNo+2}}</a></li>
+    <li><a href="javascript:void(0);" data-url="/tpi/product/list?cid={{cid}}&pageno={{parseInt(total/pageSize)}}&pagesize={{pageSize}}">&raquo;</a></li>
+</ul>
