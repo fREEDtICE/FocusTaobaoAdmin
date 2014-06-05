@@ -1,21 +1,21 @@
 var util = require("../utils/CommonUtils");
 
 module.exports = function (app, swig) {
-    swig.setFilter('basicmath', function (a, b, opt) {
-        if (arguments.length < 3) {
-            return a;
-        }
-
-        if (isNaN(a) || isNaN(b) || a === "" || b === "") {
-            return "invalid args";
-        }
-
-        if (!/[\+\-\*\/%]/.test(opt)) {
-            return "invalid operator";
-        }
-
-        return new Function('a', 'b', 'opt', 'return a opt b;')(a, b, opt);
-    });
+//    swig.setFilter('basicmath', function (a, b, opt) {
+//        if (arguments.length < 3) {
+//            return a;
+//        }
+//
+//        if (isNaN(a) || isNaN(b) || a === "" || b === "") {
+//            return "invalid args";
+//        }
+//
+//        if (!/[\+\-\*\/%]/.test(opt)) {
+//            return "invalid operator";
+//        }
+//
+//        return new Function('a', 'b', 'opt', 'return a opt b;')(a, b, opt);
+//    });
 
     swig.setFilter("contains", function (input) {
         var arr = arguments[0];

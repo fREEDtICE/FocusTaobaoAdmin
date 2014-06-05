@@ -15,12 +15,10 @@ var RedisStore = require('connect-redis')(session);
 //        sesion_mongo = require('connect-mongo')(express);
 var swig = require('swig');
 var pkg = require('../package.json');
-var langMng = require("../app/models/LangDictManager");
+//var langMng = require("../app/models/LangDictManager");
 var env = process.env.NODE_ENV || 'development';
 
 module.exports = function (app, config, passport) {
-
-    require("../app/datas/MemManager").init(config.memcached.server, config.memcached.config);
 
     app.set('showStackError', true)
 
@@ -99,6 +97,10 @@ module.exports = function (app, config, passport) {
         app_secret: config.taobao.app_secret
     });
 
+    // 初始化单例
+    var singletons = require('../app/init')(app, config);
+
+
     // 启用CSRF插件, 防止CSRF攻击
     app.use(express.csrf());
     app.use(function (req, res, next) {
@@ -145,7 +147,7 @@ module.exports = function (app, config, passport) {
 
         res.locals.langs = (function () {
             var lang = getLang(req);
-            return langMng.getDict(lang) || langMng.getDict("en");
+            return singletons.LangManager.getDict(lang) || singletons.LangManager.getDict("en");
         })(req);
         next();
     });
@@ -154,6 +156,7 @@ module.exports = function (app, config, passport) {
     app.use(function (req, res, next) {
         if (req.isAuthenticated() && req.user) {
             res.locals.user = req.user;
+            req.locals.role = req.isAuthUserCustomer() ? 'customer' : req.user.role;
         }
         next();
     });
@@ -203,5 +206,6 @@ module.exports = function (app, config, passport) {
 // development only
     if ('development' == app.get('env')) {
         app.use(express.errorHandler());
-    };
+    }
+    ;
 }

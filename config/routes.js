@@ -25,8 +25,6 @@ var customerAuth = [auth.customer.requiresLogin, auth.customer.hasAuthorization]
 
 superAuth.push(auth.admin.isSuper);
 
-console.log(superAuth);
-
 /**
  * Expose routes
  */

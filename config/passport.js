@@ -1,19 +1,19 @@
-var mongoose = require('mongoose'),
-    LocalStrategy = require('passport-local').Strategy,
-    Admin = mongoose.model('Admin'),
-    Customer = mongoose.model("Customer");
-
-var _ = require("lodash");
+var _ = require("lodash"),
+    LocalStrategy = require('passport-local').Strategy;
 
 module.exports = function (passport, config) {
     // require('./initializer')
+
+    var mongoose = require('top-models').mongoose,
+        Admin = mongoose.model('Admin'),
+        Customer = mongoose.model("Customer");
 
     passport.serializeUser(function (user, done) {
         done(null, {id: user.id, model: user.constructor.modelName});
     });
 
     passport.deserializeUser(function (id, done) {
-        if (!"model" in id) {
+        if (!("model" in id)) {
             return done("invalid deserialize id object " + JSON.stringify(id));
         }
         switch (id.model) {

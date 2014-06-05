@@ -6,17 +6,17 @@ module.exports = {
     development: {
         db: 'mongodb://localhost/taobaofocus_dev',
         root: rootPath,
-        taobao:{
+        taobao: {
 //            app_key: "21769413",
             app_key: "21585630",
 //        app_secret: "d8c1e2aaf8eea8a7729f8a29d51dffad"
             app_secret: "bd3c64cd44a648594f85f2417673dbef"
         },
-        security:{
-          runtime:{
-              uid: 502,
-              gid: 20
-          }
+        security: {
+            runtime: {
+                uid: 502,
+                gid: 20
+            }
         },
         session: {
             secret: 'XhatkhkbmnvRUtvxt677jmZbxre012MVDqss71',

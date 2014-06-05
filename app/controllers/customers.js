@@ -1,13 +1,15 @@
+var mongoose = require('top-models').mongoose,
+    Customer = mongoose.model('Customer'),
+    Order = mongoose.model('Order'),
+    OrderStatus = mongoose.models.Order.OrderStatus;
+
+//require('./config/database')(config);
 var httphelper = require("../../utils/HttpHelper"),
     auth = require('../../config/middlewares/authorization');
 
 var _ = require('lodash'),
     async = require('async');
 
-var mongoose = require('mongoose'),
-    Customer = mongoose.model('Customer'),
-    Order = mongoose.model('Order'),
-    OrderStatus = require('../models/Order').OrderStatus;
 
 var validator = require("validator");
 
@@ -60,7 +62,7 @@ exports.getShoppingCart = function (req, res) {
 
 exports.newAddress = function (req, res) {
     var customer = req.user;
-    if (!"shippingAddress" in customer) {
+    if (!("shippingAddress" in customer)) {
         customer.shippingAddress = [];
     }
 
@@ -100,7 +102,7 @@ exports.create = function (req, res, next) {
             }
             auth.authCallback(req, res);
         });
-    })
+    });
 };
 
 exports.customer = function (req, res, next, id) {
@@ -109,7 +111,7 @@ exports.customer = function (req, res, next, id) {
             return next(err);
         }
         if (!user) {
-            return next(new Error('Failed to load User ' + id))
+            return next(new Error('Failed to load User ' + id));
         }
         req.customer = user;
         next();

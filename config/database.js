@@ -18,5 +18,4 @@ module.exports = function (config) {
     mongoose.connection.on('disconnected', function () {
         connect();
     });
-
 };

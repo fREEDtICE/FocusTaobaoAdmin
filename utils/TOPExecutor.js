@@ -3,7 +3,7 @@ var taobao = require("taobao"),
     swig = require("swig"),
     async = require("async"),
     validator = require('validator'),
-    mem = require("../app/datas/MemManager"),
+    mem = require("../app/init").MemManager,
     redis = require("redis"),
     crypto = require('crypto');
 

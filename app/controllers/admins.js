@@ -1,4 +1,5 @@
-var mongoose = require("mongoose");
+var topModels = require('top-models'),
+    mongoose = topModels.mongoose;
 
 var async = require("async"),
     _ = require("lodash"),
@@ -8,7 +9,7 @@ var async = require("async"),
 
 var app = require('../../app').expressApp,
     Admin = mongoose.model("Admin"),
-    Order = require("../models/Order"),
+    Order = mongoose.model('Order'),
     Notification = mongoose.model("Notification"),
     httpHelper = require("../../utils/HttpHelper");
 
@@ -59,7 +60,7 @@ exports.admin = function (req, res, next, id) {
             return next(err);
         }
         if (!user) {
-            return next(new Error('Failed to load User ' + id))
+            return next(new Error('Failed to load User ' + id));
         }
         req.admin = user;
         next();
@@ -77,7 +78,7 @@ exports.userMng = function (req, res) {
         if (err) {
             return res.render('500');
         } else {
-            return res.render('admin/super/user_mng', {users: data, roles: require("../models/Admin").Roles});
+            return res.render('admin/super/user_mng', {users: data, roles: topModels.models.Admin.Roles});
         }
     });
 };
@@ -102,6 +103,6 @@ exports.authMng = function (req, res, next) {
         });
     });
 
-    return res.render('admin/super/auth_mng', {routes: routes, roles: require("../models/Admin").Roles});
+    return res.render('admin/super/auth_mng', {routes: routes, roles: topModels.models.Admin.Roles});
 };
 
